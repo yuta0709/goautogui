@@ -48,3 +48,17 @@ func MessageBox(text string, caption string, button MBType, icon MBType) MBResul
 	C.free(unsafe.Pointer(c))
 	return MBResult(ret)
 }
+
+func Alert(text string, caption string){
+	MessageBox(text, caption, MBOK, MBIconInformation)
+}
+
+func Confirm(text string, caption string)bool{
+	result := MessageBox(text, caption, MBOKCancel, MBIconInformation)
+	switch result{
+	case IDOK:
+		return true
+	default:
+		return false
+	}
+}
